@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Configuration status="WARN">
+	<Appenders>
+		<!-- Console Appender -->
+		<Console name="Console" target="SYSTEM_OUT">
+			<PatternLayout
+				pattern="%d{yyyy-MM-dd HH:mm:ss} - %msg%n%throwable" />
+		</Console>
+
+		<!-- RollingFile Appender (for saving logs to a file) -->
+		<RollingFile name="RollingFile" fileName="./logs/app.log"
+			filePattern="logs/app-%d{yyyy-MM-dd}.log">
+			<PatternLayout
+				pattern="%d{yyyy-MM-dd HH:mm:ss} - %msg%n%throwable" />
+			<Policies>
+				<SizeBasedTriggeringPolicy size="10MB" /> <!-- Rotate when file size exceeds 10MB -->
+			</Policies>
+		</RollingFile>
+	</Appenders>
+
+	<Loggers>
+		<!-- Root logger -->
+		<Root level="INFO">
+			<AppenderRef ref="Console" />
+			<AppenderRef ref="RollingFile" />
+		</Root>
+
+		<!-- Logger for specific package -->
+		<Logger name="com.smarbl.security.jwt" level="DEBUG"
+			additivity="false">
+			<AppenderRef ref="Console" />
+			<AppenderRef ref="RollingFile" />
+		</Logger>
+	</Loggers>
+</Configuration>
+ 
